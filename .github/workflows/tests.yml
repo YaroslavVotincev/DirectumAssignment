@@ -26,13 +26,12 @@ jobs:
       run: cd Assignment && dotnet run
     - name: Run program in release mode
       run: |
-        cd Assignment
-        dotnet publish Release -o out
+        dotnet publish Assignment -c Release -o out
         cd out
         dotnet Assignment.dll
     - name: Check created logs
       run: |
-        cd ./Assignment/out/Logs
+        cd ./out/Logs
         ls -l
         cat *.log
 
