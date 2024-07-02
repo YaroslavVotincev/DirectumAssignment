@@ -20,6 +20,19 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Install dependencies
       run: dotnet restore
-    - name: Test with the dotnet CLI
-      run: dotnet test
+    - name: Run tests
+      run: dotnet test -v=n
+    - name: Run program in debug mode
+      run: dotnet run --project Assignment
+    - name: Run program in release mode
+      run: |
+        cd Assignment
+        dotnet publish Release -o out
+        cd out
+        dotnet Assignment.dll
+    - name: Check created logs
+      run: |
+        cd ./Assignment/out/Logs
+        ls -l
+        cat *.log
 
