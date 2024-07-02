@@ -23,7 +23,7 @@ jobs:
     - name: Run tests
       run: dotnet test -v=n
     - name: Run program in debug mode
-      run: cd Assignment && dotnet run --project Assignment
+      run: cd Assignment && dotnet run
     - name: Run program in release mode
       run: |
         cd Assignment
