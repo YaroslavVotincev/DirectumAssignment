@@ -108,9 +108,7 @@
         }
         private static void Swap(ref KeyValuePair<int, string> a, ref KeyValuePair<int, string> b)
         {
-            var temp = a;
-            a = b;
-            b = temp;
+            (b, a) = (a, b);
         }
 
     }

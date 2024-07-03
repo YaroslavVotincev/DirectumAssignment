@@ -47,13 +47,18 @@ namespace Assignment
                 }
             }
 
+            public void test( List<int> list) {
+                list.Add(1);
+            }
+
         }
 
         static void Main(string[] args)
         {
             Console.WriteLine("NLog Engine/Core:");
+            var NLogEngine = new NLogEngine();
             var NLogLogger = new Logger.LoggerFactory()
-                .WithEngine(new NLogEngine())
+                .WithEngine(NLogEngine)
                 .WithLogLevel(LogMessageSeverity.Debug)
                 .Create();
 
@@ -74,8 +79,9 @@ namespace Assignment
 
             Console.WriteLine("");
             Console.WriteLine("Log4Net Engine/Core:");
+            var Log4NetEngine = new Log4NetEngine();
             var Log4NetLogger = new Logger.LoggerFactory()
-                .WithEngine(new Log4NetEngine())
+                .WithEngine(Log4NetEngine)
                 .WithLogLevel(LogMessageSeverity.Debug)
                 .Create();
 
@@ -86,6 +92,17 @@ namespace Assignment
             tempClass.DoSomethingError();
             tempClass.DoSomethingException();
 
+            NLogEngine.Shutdown();
+            Log4NetEngine.Shutdown();
+
+            var list = new List<int>([1,2,3]);
+
+            tempClass.test( list);
+            // print all elements
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

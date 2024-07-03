@@ -20,7 +20,6 @@ namespace Logger
         void Info(string source, string text);
         void Warning(string source, string text);
         void Error(string source, string text);
-
         void Shutdown();
     }
 

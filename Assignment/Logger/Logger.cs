@@ -5,7 +5,7 @@ namespace Logger
     public class LoggerFactory
     {
         private ILoggerEngine? engine;
-        private LogMessageSeverity logLevel = LogMessageSeverity.Info;
+        private LogMessageSeverity logLevel = LogMessageSeverity.Debug;
 
         public LoggerFactory(ILoggerEngine? engine = null, LogMessageSeverity? logLevel = null)
         {
@@ -39,13 +39,13 @@ namespace Logger
         private LogMessageSeverity logLevel;
         private string? source;
 
-        public Logger(ILoggerEngine engine, LogMessageSeverity logLevel = LogMessageSeverity.Info)
+        public Logger(ILoggerEngine engine, LogMessageSeverity logLevel = LogMessageSeverity.Debug)
         {
             this.engine = engine;
             this.logLevel = logLevel;
-            bool isRelease = true;
-#if DEBUG
-            isRelease = false;
+            bool isRelease = false;
+#if RELEASE
+            isRelease = true;
 #endif
             if (isRelease && logLevel == LogMessageSeverity.Debug)
             {
@@ -58,7 +58,7 @@ namespace Logger
             var stack = new System.Diagnostics.StackTrace();
             if (isCritical)
             {
-                this.engine.Error(source ?? "Unknown", $"[CRITICAL]\n{stack}{exception}");
+                this.engine.Error(source ?? "Unknown", $"[CRITICAL EXCEPTION]\n{stack}{exception}");
             }
             else
             {
